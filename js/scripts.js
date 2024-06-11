@@ -1,36 +1,47 @@
-let pokemonList = [
-    {
-        id: 1, 
-        name: 'Bulbasaur',
-        type: ['grass', 'poison'],
-        height: 2.04
-    },
-    { 
-        id: 2,
-        name: 'Ivysaur',
-        type: ['grass', 'poison'],
-        height: 3.03
-    },
-    { 
-        id: 3,
-        name: 'Venusaur',
-        type: ['grass', 'poison'],
-        height: 6.07 
-    }
-];
-// for (let i = 0; i < pokemonList.length; i++) {
-//     let pokemon = pokemonList[i];
-//     document.write(pokemon.name + " (height: " + pokemon.height + ")");
-//     if (pokemon.height > 6) {
-//         document.write(" - Wow, that\'s Big!");
-//     }
-//     document.write("</br>");
-// };
+let pokemonRepository = (function() {
+    let pokemonList = [
+        {
+            id: 1, 
+            name: 'Bulbasaur',
+            type: ['grass', 'poison'],
+            height: 2.04
+        },
+        { 
+            id: 2,
+            name: 'Ivysaur',
+            type: ['grass', 'poison'],
+            height: 3.03
+        },
+        { 
+            id: 3,
+            name: 'Venusaur',
+            type: ['grass', 'poison'],
+            height: 6.07 
+        }
+    ];
 
-pokemonList.forEach( pokemon => {
+    function add(pokemon) {
+        pokemonList.push(pokemon);
+      }
+    
+      function getAll() {
+        return pokemonList;
+      }
+    
+      return {
+        add: add,
+        getAll: getAll
+      };
+})();
+
+console.log(pokemonRepository.getAll());
+
+pokemonRepository.getAll().forEach( pokemon => {
     document.write(pokemon.name)
         if (pokemon.height > 6) {
                 document.write(" - Wow, that\'s Big!");
                 }
     document.write("</br>");
 } );
+
+
