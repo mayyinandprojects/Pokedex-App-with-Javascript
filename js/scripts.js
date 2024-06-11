@@ -21,8 +21,12 @@ let pokemonRepository = (function() {
     ];
 
     function add(pokemon) {
-        pokemonList.push(pokemon);
-      }
+        if (typeof pokemon === 'object' && pokemon !== null) {
+            pokemonList.push(pokemon);
+        } else {
+            console.log('Only objects can be added');
+        }
+    }
     
       function getAll() {
         return pokemonList;
@@ -34,8 +38,18 @@ let pokemonRepository = (function() {
       };
 })();
 
+
+//testing add function
+pokemonRepository.add({
+    id: 4, 
+    name: 'Charmander',
+    type: ['Fire'],
+    height: 0.6
+});
+pokemonRepository.add('Pikachu');
 console.log(pokemonRepository.getAll());
 
+//forEachfunction - list all pokemon's name and exclaim if height > 6
 pokemonRepository.getAll().forEach( pokemon => {
     document.write(pokemon.name)
         if (pokemon.height > 6) {
@@ -44,4 +58,6 @@ pokemonRepository.getAll().forEach( pokemon => {
     document.write("</br>");
 } );
 
-
+//testing filter function
+const result = pokemonRepository.getAll().filter((pokemon) => pokemon.name.length > 8);
+console.log(result);
