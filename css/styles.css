@@ -4,9 +4,15 @@ body{
     justify-content: center;
 }
 
-li{
+.pokemon-list{
+    display: flex;
+    justify-content: center;
+}
+
+.pokemon-list li{
     list-style-type: none;
 }
+
 
 .pokemon-card{
     background-color: #fff;
@@ -15,7 +21,7 @@ li{
     padding: 10px;
     box-shadow: 5px 5px 0px #000;
     width: 200px;
-    margin: 5px auto;
+    margin: 5px 5px;
 }
 
 .pokemon-card:hover{
@@ -25,4 +31,10 @@ li{
 
 .pokemon-card:active{
     background-color: rgb(199, 199, 199);
+}
+
+@media (max-width: 890px){
+    .pokemon-list{
+        flex-direction: column;
+    }
 }
