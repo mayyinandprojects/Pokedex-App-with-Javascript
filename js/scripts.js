@@ -45,10 +45,10 @@ let pokemonRepository = (function() {
   }
 
   function addListItem(pokemon) {
-      let pokemonListElement = document.querySelector('.pokemon-list');
+      let pokemonListElement = document.querySelector('.list-group');
       let listItem = document.createElement('li');
       let button = document.createElement('button');
-      button.classList.add('pokemon-card');
+      button.classList.add('list-group-item');
 
       let imageElement = document.createElement('img');
       imageElement.classList.add('pokemon-image');
@@ -122,7 +122,7 @@ let pokemonRepository = (function() {
 
   function renderPokemonList() {
       // Clear existing list items
-      let pokemonListElement = document.querySelector('.pokemon-list');
+      let pokemonListElement = document.querySelector('.list-group');
       pokemonListElement.innerHTML = '';
       // Add sorted list items
       pokemonRepository.getAll().forEach(function(pokemon) {
