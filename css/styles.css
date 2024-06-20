@@ -76,7 +76,7 @@ body{
     text-align: center;
   }
   
-  .modal {
+  /* .modal {
     margin: auto;
     border: 8px solid var(--colorthemered);
     display: inline-block;
@@ -88,20 +88,19 @@ body{
     max-width: 700px;
     text-align: center;
     justify-content: center;
-  }
+  } */
 
-  .modal img{
+  /* .modal img{
     margin: 0px auto;
   }
   
   .modal-close {
     float: right;
-    /* -webkit-appearance: none; */
     border: 0;
     background: none;
     color: #777;
     text-decoration: underline;
-  }
+  } */
 
 
 <<<<<<< Updated upstream
