@@ -35,25 +35,54 @@ let pokemonRepository = (function () {
     }
 
     //function: generates the buttons by setting the elements and appending them to the li .list-group
+    // function addListItem(pokemon) {
+    //     let pokemonListElement = document.querySelector('.list-group');
+    //     let listItem = document.createElement('li');
+
+    //     let button = document.createElement('button');
+    //     button.setAttribute('data-toggle', 'modal')
+    //     button.setAttribute('data-target', '#modal-container')
+    //     button.classList.add('list-group-item');
+
+    //     let imageElement = document.createElement('img');
+    //     imageElement.classList.add('pokemon-image');
+    //     imageElement.src = pokemon.imageUrl; // Set the image source to the sprite URL
+
+    //     button.innerText = '#'+ pokemon.id + '\n' + ' '+ pokemon.name; // Add the Pokémon's name
+    //     button.insertBefore(imageElement, button.firstChild);
+    //     listItem.appendChild(button);
+    //     pokemonListElement.appendChild(listItem);
+
+    //     buttonClick(button, pokemon);
+    // }
+
+    //function: generates the buttons by setting the elements and appending them to the li .list-group
     function addListItem(pokemon) {
         let pokemonListElement = document.querySelector('.list-group');
         let listItem = document.createElement('li');
-
-        let button = document.createElement('button');
-        button.setAttribute('data-toggle', 'modal')
-        button.setAttribute('data-target', '#modal-container')
-        button.classList.add('list-group-item');
-
+    
+        let card = document.createElement('div');
+        card.classList.add('card');
+    
         let imageElement = document.createElement('img');
-        imageElement.classList.add('pokemon-image');
+        imageElement.classList.add('card-img-top', 'pokemon-image');
+        card.setAttribute('alt',pokemon.name+'sprite');
         imageElement.src = pokemon.imageUrl; // Set the image source to the sprite URL
-
-        button.innerText = '#'+ pokemon.id + '\n' + ' '+ pokemon.name; // Add the Pokémon's name
-        button.insertBefore(imageElement, button.firstChild);
-        listItem.appendChild(button);
+    
+        let cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+    
+        let cardTitle = document.createElement('h5');
+        cardTitle.classList.add('card-title');
+        cardTitle.innerText = '#'+ pokemon.id + '\n' + ' '+ pokemon.name;
+    
+        cardBody.appendChild(cardTitle);
+        card.appendChild(imageElement);
+        card.appendChild(cardBody);
+        listItem.appendChild(card);
         pokemonListElement.appendChild(listItem);
-
-        buttonClick(button, pokemon);
+    
+        buttonClick(card, pokemon);
     }
 
     //function: renders the list of buttons for every pokemon available from the api (up to 151 currently)

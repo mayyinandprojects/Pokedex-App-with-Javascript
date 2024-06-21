@@ -12,28 +12,30 @@ body{
     grid-template-columns: repeat(6, 1fr);
     justify-content: center;
     margin: 0px auto;
-    width: 1300px;
+    width: 1400px;
 }
 
 .list-group li{
     list-style-type: none;
+    padding: 5px;
 }
 
-.list-group-item:hover{
+.card:hover{
     cursor: pointer;
     color: var(--colorthemered);
+    background-color: rgb(253, 255, 242);
     border: solid var(--colorthemered); 
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 .pokemon-image{
     width: 200px;
+    margin: 0px auto;
 }
 
-  #exampleModalCenter img{
+#exampleModalCenter img{
     margin: 0px auto;
-  }
-
+}
 
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
