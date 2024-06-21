@@ -5,108 +5,35 @@
 body{
     font-family: 'Press Start 2P', sans-serif;
     text-align: center;
-<<<<<<< Updated upstream
-=======
 }
-
 
 .list-group{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
->>>>>>> Stashed changes
     justify-content: center;
+    margin: 0px auto;
+    width: 1300px;
 }
 
-.pokemon-list{
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    justify-content: center;
-}
-
-.pokemon-list li{
+.list-group li{
     list-style-type: none;
+    
+}
+
+.list-group-item:hover{
+    cursor: pointer;
+    color: var(--colorthemered);
+    border: solid var(--colorthemered); 
+    text-decoration: underline;
 }
 
 .pokemon-image{
     width: 200px;
 }
 
-.pokemon-card{
-    background-color: #fff;
-    border: 3px solid #000;
-    box-shadow: 5px 5px 0px #000;
-    border-radius: 10px;
-    padding: 10px;    
-    margin: 5px 5px;
-}
-
-.pokemon-card:hover{
-    cursor: pointer;
-    color: var(--colorthemered);
-    border: 3px solid var(--colorthemered);
-    box-shadow: 5px 5px 0px var(--colorthemered);
-}
-
-.pokemon-card:active{
-    background-color: rgb(199, 199, 199);
-}
-
-#modal-container {
-    display: none;
-  }
-  
-  #modal-container.is-visible {
-    position: fixed;
-    padding: 20px;
-    box-sizing: border-box;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    
-    /* to show it above other content */
-    z-index: 999; 
-    
-    /* to allow scrolling if the screen is not high enough*/
-    overflow: auto; 
-    
-    /* this is used to center the modal */
-    display: grid;
-    text-align: center;
-  }
-  
-  /* .modal {
-    margin: auto;
-    border: 8px solid var(--colorthemered);
-    display: inline-block;
-    box-sizing: border-box;
-    border-radius: 8px;
-    background: #fff;
-    padding: 15px;
-    width: 100%;
-    max-width: 700px;
-    text-align: center;
-    justify-content: center;
-  } */
-
-  /* .modal img{
+  #modal-container img{
     margin: 0px auto;
   }
-  
-  .modal-close {
-    float: right;
-    border: 0;
-    background: none;
-    color: #777;
-    text-decoration: underline;
-  } */
-
-
-<<<<<<< Updated upstream
-=======
-@media only screen and (max-device-width: 480px) {
->>>>>>> Stashed changes
 
 @media (max-width: 890px){
     .pokemon-list{

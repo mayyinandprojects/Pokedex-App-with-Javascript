@@ -47,6 +47,7 @@ let pokemonRepository = (function() {
   function addListItem(pokemon) {
       let pokemonListElement = document.querySelector('.list-group');
       let listItem = document.createElement('li');
+
       let button = document.createElement('button');
       button.setAttribute('data-toggle','modal')
       button.setAttribute('data-target','#modal-container')
@@ -54,13 +55,13 @@ let pokemonRepository = (function() {
 
       let imageElement = document.createElement('img');
       imageElement.classList.add('pokemon-image');
-
       imageElement.src = pokemon.imageUrl; // Set the image source to the sprite URL
-      //button.appendChild(imageElement);
+      
       button.innerText = pokemon.name; // Add the Pokémon's name
       button.insertBefore(imageElement, button.firstChild);
       listItem.appendChild(button);
       pokemonListElement.appendChild(listItem);
+
       buttonClick(button, pokemon);
   }
 
@@ -133,74 +134,18 @@ let pokemonRepository = (function() {
   }
 
 
-function showModal(title, text, img) {
-    // Clear all existing modal content
-    modalContainer.innerHTML = '';
+  function showModal(title, text, img) {
+    let modal = document.querySelector('#exampleModalCenter');
+    let modalTitle = modal.querySelector('.modal-title');
+    let modalBody = modal.querySelector('.modal-body');
+    let modalText = modalBody.querySelector('p');
+    let modalImage = modalBody.querySelector('img');
   
-    let modal = document.createElement('div');
-    modal.classList.add('modal', 'fade');
-    modal.setAttribute('tabindex', '-1');
-    modal.setAttribute('role', 'dialog');
-    modal.setAttribute('aria-labelledby', 'pokemonCardModal');
-    modal.setAttribute('aria-hidden', 'true');
+    modalTitle.innerText = title;
+    modalText.innerText = text;
+    modalImage.src = img;
   
-    let modalDialog = document.createElement('div');
-    modalDialog.classList.add('modal-dialog');
-    modalDialog.setAttribute('role', 'document');
-  
-    let modalContent = document.createElement('div');
-    modalContent.classList.add('modal-content');
-  
-    let modalHeader = document.createElement('div');
-    modalHeader.classList.add('modal-header');
-  
-    let titleElement = document.createElement('h5');
-    titleElement.classList.add('modal-title');
-    titleElement.setAttribute('id', 'pokemonCardModal');
-    titleElement.innerText = title;
-  
-    let closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('close');
-    closeButtonElement.setAttribute('type', 'button');
-    closeButtonElement.setAttribute('data-dismiss', 'modal');
-    closeButtonElement.setAttribute('aria-label', 'Close');
-    closeButtonElement.innerHTML = '<span aria-hidden="true">&times;</span>';
-  
-    modalHeader.appendChild(titleElement);
-    modalHeader.appendChild(closeButtonElement);
-  
-    let modalBody = document.createElement('div');
-    modalBody.classList.add('modal-body');
-  
-    let contentElement = document.createElement('p');
-    contentElement.innerText = text;
-  
-    let imageElement = document.createElement("img");
-    imageElement.setAttribute("src", img);
-    imageElement.setAttribute("width", "304");
-    imageElement.setAttribute("height", "228");
-    imageElement.setAttribute("alt", "Pokemon Sprite");
-  
-    modalBody.appendChild(contentElement);
-    modalBody.appendChild(imageElement);
-  
-    let modalFooter = document.createElement('div');
-    modalFooter.classList.add('modal-footer');
-  
-    let closeButtonFooter = document.createElement('button');
-    closeButtonFooter.classList.add('btn', 'btn-secondary');
-    closeButtonFooter.setAttribute('type', 'button');
-    closeButtonFooter.setAttribute('data-dismiss', 'modal');
-    closeButtonFooter.innerText = 'Close';
-  
-    modalFooter.appendChild(closeButtonFooter);
-    modalContent.appendChild(modalHeader);
-    modalContent.appendChild(modalBody);
-    modalContent.appendChild(modalFooter);
-    modalDialog.appendChild(modalContent);
-    modal.appendChild(modalDialog);
-    modalContainer.appendChild(modal);
-  
+    // Show the modal
     $(modal).modal('show');
   }
 
