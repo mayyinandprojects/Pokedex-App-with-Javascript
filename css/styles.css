@@ -5,6 +5,15 @@
 body{
     font-family: 'Press Start 2P', sans-serif;
     text-align: center;
+<<<<<<< Updated upstream
+=======
+}
+
+
+.list-group{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+>>>>>>> Stashed changes
     justify-content: center;
 }
 
@@ -95,6 +104,10 @@ body{
   }
 
 
+<<<<<<< Updated upstream
+=======
+@media only screen and (max-device-width: 480px) {
+>>>>>>> Stashed changes
 
 @media (max-width: 890px){
     .pokemon-list{
