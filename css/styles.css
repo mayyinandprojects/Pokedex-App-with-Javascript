@@ -31,12 +31,39 @@ body{
     width: 200px;
 }
 
-  #modal-container img{
+  #exampleModalCenter img{
     margin: 0px auto;
   }
 
-@media (max-width: 890px){
-    .pokemon-list{
-        flex-direction: column;
+
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+    .list-group{
+        grid-template-columns: repeat(1, 1fr);
+        width: 300px;
     }
-}
+} 
+
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 768px) {
+
+    .list-group{
+        grid-template-columns: repeat(2, 1fr);
+        width: 480px;
+    }
+} 
+
+@media only screen and (min-device-width: 769px) and (max-device-width: 1024px) {
+
+    .list-group{
+        grid-template-columns: repeat(3, 1fr);
+        width: 768px;
+    }
+} 
+
+
+
+
+
+
