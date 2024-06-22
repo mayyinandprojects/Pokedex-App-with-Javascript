@@ -79,7 +79,7 @@ let pokemonRepository = (function () {
     function getTypeColor(type) {
         const typeColors = {
             bug: '#afd354',
-            dark: '#292838',
+            dark: '#545177',
             dragon: '#394fba',
             electric: '#fcfa74',
             fairy: '#e198f9',
