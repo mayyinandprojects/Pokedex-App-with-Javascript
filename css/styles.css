@@ -41,7 +41,7 @@ p{
     color: var(--colorthemered);
     background-color: rgb(253, 255, 242);
     border: solid var(--colorthemered); 
-    /* text-decoration: underline; */
+    text-decoration: underline;
 }
 
 .pokemon-image{
@@ -53,6 +53,10 @@ p{
     margin: 0px auto;
 }
 
+
+footer{
+    margin-top: 50px;
+}
 
 
 @media only screen and (min-width: 1px) and (max-width: 480px) {

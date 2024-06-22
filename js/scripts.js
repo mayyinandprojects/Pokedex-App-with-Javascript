@@ -118,7 +118,7 @@ let pokemonRepository = (function () {
     }
 
 
-    //function: loads the pokemon based on the array and generate the list of pokemon cards
+    //function: loads the pokemon based on the pokeAPi and generate the list of pokemon cards
     function loadList() {
         showLoadingMessage();//display loading message
         //promise to fetch the pokemon details from the url
