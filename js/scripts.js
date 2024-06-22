@@ -37,69 +37,70 @@ let pokemonRepository = (function () {
 
 
 
-    //function: generates the buttons by setting the elements and appending them to the li .list-group
+    //function: generates the individual pokemon cards by setting the elements and appending them to the li .list-group
     function addListItem(pokemon) {
         let pokemonListElement = document.querySelector('.list-group');
         let listItem = document.createElement('li');
-    
+
         let card = document.createElement('div');
         card.classList.add('card');
 
-           // Set the background color based on Pokémon types
-         if (pokemon.types.length > 1) {
+        // Set the background color based on Pokémon types
+        if (pokemon.types.length > 1) {
             let color1 = getTypeColor(pokemon.types[0]);
             let color2 = getTypeColor(pokemon.types[1]);
             card.style.background = `linear-gradient(to right, ${color1} 50%, ${color2} 50%)`;
         } else {
             card.style.backgroundColor = getTypeColor(pokemon.types[0]);
         }
-    
+
         let imageElement = document.createElement('img');
         imageElement.classList.add('card-img-top', 'pokemon-image');
-        card.setAttribute('alt',pokemon.name+'sprite');
+        card.setAttribute('alt', pokemon.name + 'sprite');
         imageElement.src = pokemon.imageUrl; // Set the image source to the sprite URL
-    
+
         let cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
-    
+
         let cardTitle = document.createElement('h5');
         cardTitle.classList.add('card-title');
-        cardTitle.innerText = '#'+ pokemon.id + '\n' + ' '+ pokemon.name;
-    
+        cardTitle.innerText = '#' + pokemon.id + '\n' + ' ' + pokemon.name;
+
         cardBody.appendChild(cardTitle);
         card.appendChild(imageElement);
         card.appendChild(cardBody);
         listItem.appendChild(card);
         pokemonListElement.appendChild(listItem);
-    
+
         buttonClick(card, pokemon);
     }
 
-        function getTypeColor(type) {
-            const typeColors = {
-                bug: '#afd354',
-                dark: '#292838',
-                dragon: '#394fba',
-                electric: '#fcfa74',
-                fairy: '#e198f9',
-                fighting: '#823746',
-                fire: '#efad3b',
-                flying: '#7da6e0',
-                ghost: '#6e54af',
-                grass: '#36874f',
-                ground: '#894c34',
-                ice: '#82d3e0',
-                normal: '#e0e0e0',
-                poison: '#7f429b',
-                psychic: '#d86584',
-                rock: '#999999',
-                steel: '#566d89',
-                water: '#226ccc', 
-            };
-            return typeColors[type] || 'white'; // Default to gray if type not found
-        }
+    //function: helper function to set the background-color of the individual cards in addListItem
+    function getTypeColor(type) {
+        const typeColors = {
+            bug: '#afd354',
+            dark: '#292838',
+            dragon: '#394fba',
+            electric: '#fcfa74',
+            fairy: '#e198f9',
+            fighting: '#823746',
+            fire: '#efad3b',
+            flying: '#7da6e0',
+            ghost: '#6e54af',
+            grass: '#36874f',
+            ground: '#894c34',
+            ice: '#82d3e0',
+            normal: '#e0e0e0',
+            poison: '#7f429b',
+            psychic: '#d86584',
+            rock: '#999999',
+            steel: '#566d89',
+            water: '#226ccc',
+        };
+        return typeColors[type] || 'white'; // Default to gray if type not found
+    }
 
-    //function: renders the list of buttons for every pokemon available from the api (up to 151 currently)
+    //function: renders the list of cards for every pokemon available from the api (up to 151 currently)
     function renderPokemonList() {
         // Clear existing list items
         let pokemonListElement = document.querySelector('.list-group');
@@ -116,8 +117,8 @@ let pokemonRepository = (function () {
         return idMatch ? parseInt(idMatch[1]) : null;
     }
 
- 
-    //function: loads the pokemon based on the array and generate the list of pokemon buttons
+
+    //function: loads the pokemon based on the array and generate the list of pokemon cards
     function loadList() {
         showLoadingMessage();//display loading message
         //promise to fetch the pokemon details from the url
@@ -147,20 +148,60 @@ let pokemonRepository = (function () {
         });
     }
 
-   //function: prepares information to be prepared on the modal
-   function loadDetails(item) {
-    let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-        return response.json();
-    }).then(function (details) {
-        item.imageUrl = details.sprites.front_default;
-        item.types = item.types = details.types.map(typeInfo => typeInfo.type.name); // Ensure types are stored as an array of strings
-        item.height = details.height;
-        item.weight = details.weight;
-    }).catch(function (e) {
-        console.error(e);
+    // function: Function to update API URL and reload list, activate via the next event listener 
+    function updateApiUrlAndReload(newUrl) {
+        apiUrl = newUrl;
+        pokemonList = []; // Clear the current list
+        loadList(); 
+    }
+
+    // Add event listener to the button with respective IDs
+    document.getElementById('gen1').addEventListener('click', function () {
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon/?limit=151');
     });
-}
+    document.getElementById('gen2').addEventListener('click', function () {
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=151&limit=100');
+    });
+    document.getElementById('gen3').addEventListener('click', function () {
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=251&limit=134');
+    });
+    document.getElementById('gen4').addEventListener('click', function () {
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=386&limit=108');
+    });
+    document.getElementById('gen5').addEventListener('click', function () {
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=494&limit=155');
+    });
+    document.getElementById('gen6').addEventListener('click', function () {
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=649&limit=72');
+    });
+    document.getElementById('gen7').addEventListener('click', function () {
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=721&limit=87');
+    });
+    document.getElementById('gen8').addEventListener('click', function () {
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=809&limit=98');
+    });
+    document.getElementById('gen9').addEventListener('click', function () {
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=898&limit=111');
+    });
+
+
+
+
+
+    //function: prepares information to be prepared on the modal
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            item.imageUrl = details.sprites.front_default;
+            item.types = item.types = details.types.map(typeInfo => typeInfo.type.name); // Ensure types are stored as an array of strings
+            item.height = details.height;
+            item.weight = details.weight;
+        }).catch(function (e) {
+            console.error(e);
+        });
+    }
     //function: display the pokemon types properly on the modal
     function loadTypes(item) {
         returntypes = "";
@@ -212,3 +253,5 @@ let pokemonRepository = (function () {
 
 // Load the list of Pokémon
 pokemonRepository.loadList();
+
+
