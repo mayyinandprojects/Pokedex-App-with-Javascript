@@ -13,7 +13,7 @@ let pokemonRepository = (function () {
         loadingMessageElement.style.display = 'none';
     }
 
-    //function: add pokemon into the array with validation criteria
+    //function: add pokemon into the array with the following validation criteria
     function add(pokemon) {
         if (typeof pokemon === 'object' && "name" in pokemon && "id" in pokemon) {
             pokemonList.push(pokemon);
@@ -34,27 +34,8 @@ let pokemonRepository = (function () {
         });
     }
 
-    //function: generates the buttons by setting the elements and appending them to the li .list-group
-    // function addListItem(pokemon) {
-    //     let pokemonListElement = document.querySelector('.list-group');
-    //     let listItem = document.createElement('li');
 
-    //     let button = document.createElement('button');
-    //     button.setAttribute('data-toggle', 'modal')
-    //     button.setAttribute('data-target', '#modal-container')
-    //     button.classList.add('list-group-item');
 
-    //     let imageElement = document.createElement('img');
-    //     imageElement.classList.add('pokemon-image');
-    //     imageElement.src = pokemon.imageUrl; // Set the image source to the sprite URL
-
-    //     button.innerText = '#'+ pokemon.id + '\n' + ' '+ pokemon.name; // Add the Pokémon's name
-    //     button.insertBefore(imageElement, button.firstChild);
-    //     listItem.appendChild(button);
-    //     pokemonListElement.appendChild(listItem);
-
-    //     buttonClick(button, pokemon);
-    // }
 
     //function: generates the buttons by setting the elements and appending them to the li .list-group
     function addListItem(pokemon) {
@@ -63,6 +44,15 @@ let pokemonRepository = (function () {
     
         let card = document.createElement('div');
         card.classList.add('card');
+
+           // Set the background color based on Pokémon types
+         if (pokemon.types.length > 1) {
+            let color1 = getTypeColor(pokemon.types[0]);
+            let color2 = getTypeColor(pokemon.types[1]);
+            card.style.background = `linear-gradient(to right, ${color1} 50%, ${color2} 50%)`;
+        } else {
+            card.style.backgroundColor = getTypeColor(pokemon.types[0]);
+        }
     
         let imageElement = document.createElement('img');
         imageElement.classList.add('card-img-top', 'pokemon-image');
@@ -85,6 +75,30 @@ let pokemonRepository = (function () {
         buttonClick(card, pokemon);
     }
 
+        function getTypeColor(type) {
+            const typeColors = {
+                bug: '#afd354',
+                dark: '#292838',
+                dragon: '#394fba',
+                electric: '#fcfa74',
+                fairy: '#e198f9',
+                fighting: '#823746',
+                fire: '#efad3b',
+                flying: '#7da6e0',
+                ghost: '#6e54af',
+                grass: '#36874f',
+                ground: '#894c34',
+                ice: '#82d3e0',
+                normal: '#e0e0e0',
+                poison: '#7f429b',
+                psychic: '#d86584',
+                rock: '#999999',
+                steel: '#566d89',
+                water: '#226ccc', 
+            };
+            return typeColors[type] || 'white'; // Default to gray if type not found
+        }
+
     //function: renders the list of buttons for every pokemon available from the api (up to 151 currently)
     function renderPokemonList() {
         // Clear existing list items
@@ -102,6 +116,7 @@ let pokemonRepository = (function () {
         return idMatch ? parseInt(idMatch[1]) : null;
     }
 
+ 
     //function: loads the pokemon based on the array and generate the list of pokemon buttons
     function loadList() {
         showLoadingMessage();//display loading message
@@ -139,7 +154,7 @@ let pokemonRepository = (function () {
         return response.json();
     }).then(function (details) {
         item.imageUrl = details.sprites.front_default;
-        item.types = loadTypes(details.types);
+        item.types = item.types = details.types.map(typeInfo => typeInfo.type.name); // Ensure types are stored as an array of strings
         item.height = details.height;
         item.weight = details.weight;
     }).catch(function (e) {
