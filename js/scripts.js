@@ -152,7 +152,7 @@ let pokemonRepository = (function () {
     function updateApiUrlAndReload(newUrl) {
         apiUrl = newUrl;
         pokemonList = []; // Clear the current list
-        loadList(); 
+        loadList();
     }
 
     // Add event listener to the button with respective IDs
@@ -188,21 +188,23 @@ let pokemonRepository = (function () {
 
 
 
-    //function: prepares information to be prepared on the modal
+    //function: promise prepares information to be prepared on the modal
     function loadDetails(item) {
         let url = item.detailsUrl;
         return fetch(url).then(function (response) {
             return response.json();
         }).then(function (details) {
             item.imageUrl = details.sprites.front_default;
-            item.types = item.types = details.types.map(typeInfo => typeInfo.type.name); // Ensure types are stored as an array of strings
+            item.types = details.types.map(typeInfo => typeInfo.type.name); // Ensure types are stored as an array of strings
+            item.abilities = details.abilities.map(abilityInfo => abilityInfo.ability.name);
             item.height = details.height;
             item.weight = details.weight;
         }).catch(function (e) {
             console.error(e);
         });
     }
-    //function: display the pokemon types properly on the modal
+
+    //function: to display the pokemon types properly on the modal
     function loadTypes(item) {
         returntypes = "";
         item.forEach(function (row) {
@@ -212,12 +214,23 @@ let pokemonRepository = (function () {
         return returntypes.substring(0, returntypes.length - 2);
     }
 
+    //function: display the pokemon abilities properly on the modal
+    function loadAbilities(item) {
+        returnAbilities = "";
+        item.forEach(function (row) {
+            returnAbilities += row.ability.name + ", ";
+        })
+
+        return returnAbilities.substring(0, returnAbilities.length - 2);
+    }
+
     //function: details to be displayed on the modal
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
             showModal(
-                pokemon.name,
+                'No.' + pokemon.id + ' ' + pokemon.name,
                 'Type: ' + pokemon.types + '\n' +
+                'Abilities: ' + pokemon.abilities + '\n' +
                 'Height: ' + pokemon.height + '\n' +
                 'Weight: ' + pokemon.weight + '\n',
                 pokemon.imageUrl
@@ -247,11 +260,10 @@ let pokemonRepository = (function () {
         getAll: getAll,
         showDetails: showDetails,
         addListItem: addListItem,
-        loadList: loadList
+        loadList: loadList,
     };
 })();
 
 // Load the list of Pokémon
 pokemonRepository.loadList();
-
-
+console.log(loadAbilities);
