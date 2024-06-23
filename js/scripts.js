@@ -181,7 +181,7 @@ let pokemonRepository = (function () {
         updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=809&limit=96');
     });
     document.getElementById('gen9').addEventListener('click', function () {
-        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=898&limit=127');
+        updateApiUrlAndReload('https://pokeapi.co/api/v2/pokemon?offset=905&limit=120');
     });
 
 
