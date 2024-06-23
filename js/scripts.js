@@ -56,8 +56,8 @@ let pokemonRepository = (function () {
 
         let imageElement = document.createElement('img');
         imageElement.classList.add('card-img-top', 'pokemon-image');
-        card.setAttribute('alt', pokemon.name + 'sprite');
         imageElement.src = pokemon.imageUrl; // Set the image source to the sprite URL
+        imageElement.setAttribute('alt', pokemon.name + ' sprite');
 
         let cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
