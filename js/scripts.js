@@ -210,7 +210,8 @@ let pokemonRepository = (function () {
         return fetch(speciesUrl).then(function (response) {
             return response.json();
         }).then(function (details) {
-            item.flavorText = details.flavor_text_entries[0].flavor_text;
+            let englishFlavorText = details.flavor_text_entries.find(entry => entry.language.name === 'en');
+            item.flavorText = englishFlavorText ? englishFlavorText.flavor_text : 'No flavor text available.';//ensures english only flavor text is loaded
         }).catch(function (e) {
             console.error(e);
         });
