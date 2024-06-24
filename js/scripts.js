@@ -223,7 +223,7 @@ let pokemonRepository = (function () {
         loadDetails(pokemon).then(function () {
             showModal(
                 'No.' + pokemon.id + ' ' + pokemon.name,
-                'Type: ' + pokemon.types + '\n' +
+                'Type: '  + pokemon.types + '\n' +
                 'Abilities: ' + pokemon.abilities + '\n' +
                 'Height: ' + pokemon.height + '\n' +
                 'Weight: ' + pokemon.weight + '\n',
