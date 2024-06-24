@@ -1,0 +1,15 @@
+{
+  "name": "simple-js-app",
+  "version": "1.0.0",
+  "main": "stylelint.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^9.5.0"
+  }
+}

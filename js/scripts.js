@@ -1,7 +1,6 @@
 let pokemonRepository = (function () {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
-    let modalContainer = document.querySelector('#modal-container');
 
     function showLoadingMessage() {
         let loadingMessageElement = document.getElementById('loading-message');
@@ -15,7 +14,7 @@ let pokemonRepository = (function () {
 
     //function: add pokemon into the array with the following validation criteria
     function add(pokemon) {
-        if (typeof pokemon === 'object' && "name" in pokemon && "id" in pokemon) {
+        if (typeof pokemon === 'object' && 'name' in pokemon && 'id' in pokemon) {
             pokemonList.push(pokemon);
         } else {
             console.log('Only objects with a name and id can be added');
@@ -29,7 +28,7 @@ let pokemonRepository = (function () {
 
     //function: event listener to open the modal when button is clicked
     function buttonClick(button, pokemon) {
-        button.addEventListener('click', function (event) {
+        button.addEventListener('click', function () {
             showDetails(pokemon);
         });
     }
@@ -196,33 +195,27 @@ let pokemonRepository = (function () {
         }).then(function (details) {
             item.imageUrl = details.sprites.front_default;
             item.types = details.types.map(typeInfo => typeInfo.type.name); // Ensure types are stored as an array of strings
-            item.abilities = details.abilities.map(abilityInfo => abilityInfo.ability.name);
+            item.abilities = details.abilities.map(abilityInfo => abilityInfo.ability.name);// Ensure types are stored as an array of strings
             item.height = details.height;
             item.weight = details.weight;
+            return loadFlavorText(item);
         }).catch(function (e) {
             console.error(e);
         });
     }
 
-    //function: to display the pokemon types properly on the modal
-    function loadTypes(item) {
-        returntypes = "";
-        item.forEach(function (row) {
-            returntypes += row.type.name + ", ";
-        })
-
-        return returntypes.substring(0, returntypes.length - 2);
+    //function: promise prepares flavor-text or pokedex entry to be prepared on the modal
+    function loadFlavorText(item) {
+        let speciesUrl = item.detailsUrl.replace('/pokemon/', '/pokemon-species/');
+        return fetch(speciesUrl).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            item.flavorText = details.flavor_text_entries[0].flavor_text;
+        }).catch(function (e) {
+            console.error(e);
+        });
     }
 
-    //function: display the pokemon abilities properly on the modal
-    function loadAbilities(item) {
-        returnAbilities = "";
-        item.forEach(function (row) {
-            returnAbilities += row.ability.name + ", ";
-        })
-
-        return returnAbilities.substring(0, returnAbilities.length - 2);
-    }
 
     //function: details to be displayed on the modal
     function showDetails(pokemon) {
@@ -233,26 +226,31 @@ let pokemonRepository = (function () {
                 'Abilities: ' + pokemon.abilities + '\n' +
                 'Height: ' + pokemon.height + '\n' +
                 'Weight: ' + pokemon.weight + '\n',
-                pokemon.imageUrl
+                pokemon.imageUrl,
+                'Pokédex Entry: ' + '\n' + pokemon.flavorText
+
             );
             console.log(pokemon);
         });
     }
 
     //function: attach information to the bootstrap modal template on the .html file
-    function showModal(title, text, img) {
+    function showModal(title, text, img, flavorText) {
         let modal = document.querySelector('#exampleModalCenter');
         let modalTitle = modal.querySelector('.modal-title');
         let modalBody = modal.querySelector('.modal-body');
         let modalText = modalBody.querySelector('p');
         let modalImage = modalBody.querySelector('img');
+        let modalFlavorText = modalBody.querySelector('#flavor-text');
 
         modalTitle.innerText = title;
         modalText.innerText = text;
         modalImage.src = img;
+        modalFlavorText.innerText = flavorText;
 
         // Show the modal
         $(modal).modal('show');
+
     }
 
     return {
@@ -261,9 +259,9 @@ let pokemonRepository = (function () {
         showDetails: showDetails,
         addListItem: addListItem,
         loadList: loadList,
+        loadFlavorText: loadFlavorText
     };
 })();
 
 // Load the list of Pokémon
 pokemonRepository.loadList();
-console.log(loadAbilities);
