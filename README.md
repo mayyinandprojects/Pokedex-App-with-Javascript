@@ -18,6 +18,8 @@ The app automatically loads and displays a list of the first 151 Pokémon from t
 - BootStrap
 - PokéAPI
 
+# View Live 
+https://mayyinandprojects.github.io/Pokedex-App-with-Javascript/#home
 
 # Credits
 Pokémon data is provided by the PokéAPI.
