@@ -22,7 +22,8 @@ The app automatically loads and displays a list of the first 151 Pokémon from t
 https://mayyinandprojects.github.io/Pokedex-App-with-Javascript/#home
 
 # Credits
-Pokémon data is provided by the PokéAPI.
+Pokémon data is provided by the PokéAPI (https://pokeapi.co/about).
+The Pokémon franchise belongs to the Pokémon Company (https://www.pokemon.com/us).
 Background colors for Pokémon types are inspired by the Pokémon games.
 
 # License
