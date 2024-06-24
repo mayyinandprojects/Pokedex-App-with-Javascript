@@ -1,5 +1,5 @@
-# Pokémon Repository App
-This app is a simple Pokémon repository that displays a list of Pokémon from nine different generations fetched from the PokéAPI. It allows users to view Pokémon details in a modal, including their types, abilities, height, weight, and a Pokémon entry. The app also provides options to load Pokémon from different generations.
+# Pokédex App
+This app is a simple Pokémon repository that displays a list of Pokémon from nine different generations fetched from the PokéAPI. It allows users to view Pokémon details in a modal, including their types, abilities, height, weight, and a Pokédex entry. The app also provides options to load Pokémon from different generations.
 
 This project is also made in part of learning how to utilize Javascript and various other relevant tools for the Full Stack Web Development CareerFoundry Course. 
 
@@ -22,7 +22,7 @@ The app automatically loads and displays a list of the first 151 Pokémon from t
 # Credits
 Pokémon data is provided by the PokéAPI.
 Background colors for Pokémon types are inspired by the Pokémon games.
-License
-This project is open source and available under the MIT License.
 
+# License
+This project is open source and available under the MIT License.
 Feel free to modify the content and style as needed to suit your project's specifics.
